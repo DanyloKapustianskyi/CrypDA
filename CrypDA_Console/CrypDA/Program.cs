@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CrypDA_Console
+namespace CrypDA
 {
     class Program
     {
