@@ -29,7 +29,6 @@ namespace CrypDA
                 }).UseConsoleLifetime().Build();
 
 
-            Console.WriteLine(Configuration.GetValue<string>("BinanceClient:Host"));
         }
     }
 }
