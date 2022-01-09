@@ -9,22 +9,24 @@ namespace CrypDA
 {
     class Program
     {
-
         public static IConfiguration Configuration { get; set; }
 
-            static void Main(string[] args)
+        static void Main(string[] args)
         {
-            var configurationBuilder = new ConfigurationBuilder();
-            Configuration=configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
+            //var configurationBuilder = new ConfigurationBuilder();
+            //Configuration = configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
 
-            //var builder = new HostBuilder()
-            //    .ConfigureServices((hostContext, services) =>
-            //    {
-            //        var serviceProvider = services.BuildServiceProvider();
-            //        Configuration = serviceProvider.GetService<IConfiguration>();
-            //        services.AddBinanceClient(Configuration);
+            var builder = new HostBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    var serviceProvider = services.BuildServiceProvider();
+                    Configuration = serviceProvider.GetService<IConfiguration>();
+                    services.AddBinanceClient(Configuration);
 
-            //    }).UseConsoleLifetime().Build();
+                }).ConfigureAppConfiguration((hostContext, configurationBuilder) =>
+                {
+                    Configuration = configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
+                }).UseConsoleLifetime().Build();
 
             var binanceSettings = Configuration.GetSection("BinanceClient").Get<BinanceClientSettings>();
 
