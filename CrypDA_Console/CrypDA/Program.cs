@@ -25,7 +25,7 @@ namespace CrypDA
 
                 }).ConfigureAppConfiguration((hostContext, configurationBuilder) =>
                 {
-                    Configuration = configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
+                    configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                 }).UseConsoleLifetime().Build();
 
             var binanceSettings = Configuration.GetSection("BinanceClient").Get<BinanceClientSettings>();
