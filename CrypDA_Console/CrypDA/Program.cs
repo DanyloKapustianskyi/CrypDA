@@ -28,7 +28,6 @@ namespace CrypDA
                     configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                 }).UseConsoleLifetime().Build();
 
-            var binanceSettings = Configuration.GetSection("BinanceClient").Get<BinanceClientSettings>();
 
             Console.WriteLine(Configuration.GetValue<string>("BinanceClient:Host"));
         }
